@@ -1,0 +1,54 @@
+
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\title{NB/BD Program toward RH: Version 5 (Proof Roadmap)}
+\author{세라비 \& 세라피}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+Version 4 demonstrated numerically the simultaneous satisfaction of two core conditions:
+(i) $M<0$ (negative main--diag) and 
+(ii) off--diag suppression at the $1/\log N$ scale.
+Version 5 outlines the steps needed to convert this into a rigorous proof.
+
+\section{Correct Frame Alignment}
+We must work within the exact Nyman--Beurling/Báez-Duarte (NB/BD) frame:
+\begin{itemize}
+\item Admissible functions $f(t)$ with weight $w(t)=1/(1/4+t^2)$.
+\item Approximation of $1$ in $L^2(w)$ by linear combinations of $n^{it-1}$.
+\end{itemize}
+Any modified kernel or basis (e.g. band-limited, phase-modulated Gaussians) must be shown equivalent to legal test functions under this frame.
+
+\section{Uniform Bounds}
+Prove that for sufficiently large $N$,
+\begin{equation}
+M(c^\*) \le -\theta \sum|a_n|^2, 
+\quad 
+\frac{E_{\mathrm{off}}(c^\*)}{\sum|a_n|^2} \le \frac{C}{\log N},
+\end{equation}
+with constants $\theta, C > 0$ independent of $N$.
+
+\section{Regularity of Basis}
+Check that chosen modes (Gaussian, phase-modulated, $\mu(n)/n$) belong to admissible closure. 
+Demonstrate $L^2$ integrability and bounded growth.
+
+\section{Residual Terms}
+Control truncation and discretization errors explicitly. 
+Bound remainder $R_T$ for truncation $T=N^\gamma$.
+
+\section{Closing the Chain}
+Combine estimates to show
+\begin{equation}
+d_N^2 \le -\theta \sum|a_n|^2 + \frac{C}{\log N}\sum|a_n|^2 + o(1).
+\end{equation}
+For large $N$, $\frac{C}{\log N} < \theta$ holds, hence $d_N \to 0$, equivalent to RH.
+
+\section{Conclusion}
+Version 5 establishes a roadmap: aligning with NB/BD rigor, proving uniform bounds, and controlling residuals. 
+This sets the stage for transforming numerical evidence (V4) into a proof strategy.
+
+\end{document}

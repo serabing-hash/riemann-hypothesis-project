@@ -1,0 +1,63 @@
+
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\title{NB/BD Program toward RH: Version 3 (Joint Optimization \& Uniform Bounds)}
+\author{세라비 \& 세라피}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{V3 Overview}
+Version 3 aims to \emph{simultaneously} control the off-diagonal term and flip the diagonal--main piece negative under a unified choice of coefficients.
+
+\section{Quadratic Objective}
+We define the objective
+\begin{equation}
+\mathcal{J}_\lambda(c)=2\pi(1-2c^\top s_1+c^\top Kc)+\lambda\,c^\top(B^\top W B)c+\rho\|c\|^2,
+\end{equation}
+which is convex in $c$. The minimizer is explicit:
+\begin{equation}
+c^\ast=(2\pi K+\lambda B^\top W B+\rho I)^{-1}(2\pi s_1).
+\end{equation}
+
+\section{Acceptance Criteria}
+We accept a parameter window if
+\begin{equation}
+M(c^\ast)\le -\theta\sum|a_n|^2,\qquad
+\frac{E_{\mathrm{off}}(c^\ast)}{\sum|a_n|^2}\le \frac{C}{\log N},
+\end{equation}
+with stable $(\theta,C)$ across $N$.
+
+\section{References}
+\begin{thebibliography}{9}
+
+\bibitem{Beurling1955}
+A.~Beurling,
+\textit{A closure problem related to the Riemann zeta-function},
+Proc. Nat. Acad. Sci. U.S.A. 41 (1955), 312--314.
+
+\bibitem{Nyman1950}
+B.~Nyman,
+\textit{On some groups and semigroups of translations},
+PhD thesis, Uppsala University, 1950.
+
+\bibitem{BaezDuarte2003}
+L.~Báez-Duarte,
+\textit{A strengthening of the Nyman--Beurling criterion for the Riemann Hypothesis},
+Rendiconti Lincei, 14 (2003), 5--11.
+
+\bibitem{Titchmarsh1986}
+E.~C. Titchmarsh (revised by D. R. Heath-Brown),
+\textit{The Theory of the Riemann Zeta-Function},
+2nd ed., Oxford University Press, 1986.
+
+\bibitem{Conrey2003}
+J.~B. Conrey,
+\textit{The Riemann Hypothesis},
+Notices Amer. Math. Soc. 50 (2003), 341--353.
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,23 @@
+
+\section{Numerical Results for V3}
+We performed a sweep over parameters $(\lambda,\rho)$ for $N \in \{200,500,800,1000\}$. 
+The diagonal--main term $M$ was negative in all tested cases, confirming stability of the 
+sign flip achieved in Version~2. However, the off-diagonal suppression ratio 
+$\mathrm{ratio}=E_{\mathrm{off}}/\sum |a_n|^2$ remained at the $0.8$--$0.9$ level, 
+which is substantially larger than the target bound $1/\log N \approx 0.15$--$0.18$. 
+Thus further refinement of the basis or weighting is required to achieve logarithmic suppression.
+
+Table~\ref{tab:v3_summary} summarizes the observed averages.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c|c|c}
+$N$ & Avg. ratio & Min $M$ & Max $M$ \\ \hline
+200 & 0.88 & -1.80 & -1.53 \\
+500 & 0.86 & -2.01 & -1.72 \\
+800 & 0.85 & -2.12 & -1.85 \\
+1000 & 0.85 & -2.16 & -1.90 \\
+\end{tabular}
+\caption{Summary of V3 sweep: main--diag negative, but ratio off by factor $\sim 5$.}
+\label{tab:v3_summary}
+\end{table}
