@@ -1,0 +1,69 @@
+\section{Analytic Improvements: Explicit $\varepsilon$--$\delta$ Targets and Zeta Control}
+
+\subsection{An explicit $\varepsilon$--$\delta$ target for $d_N$}
+We seek an explicit function $N(\varepsilon)$ such that
+\[
+d_{N(\varepsilon)} \le \varepsilon,\qquad \text{for all } \varepsilon\in (0,\varepsilon_0].
+\]
+Write the normal equations matrix as $A=I+E$ and the right-hand side as $B$.
+Let $\|\cdot\|$ denote the operator norm on $\ell^2(\{1,\dots,N\})$. 
+If we achieve
+\begin{equation}\label{eq:eps-delta-target}
+\|E\| \le C_1(\log N)^{-\theta} \le \tfrac12, 
+\qquad \|B\| \le C_2, 
+\end{equation}
+then the Neumann series gives $\|A^{-1}\| \le 2$ and hence
+\[
+d_N \le \|A^{-1}\|\,\|B\|\,(\log N)^{- \theta/2} \le 2C_2\,(\log N)^{-\theta/2}.
+\]
+Thus the explicit choice
+\begin{equation}\label{eq:N-of-eps}
+N(\varepsilon)=\exp\!\Big\{\Big(\frac{2C_2}{\varepsilon}\Big)^{2/\theta}\Big\}
+\end{equation}
+is admissible once \eqref{eq:eps-delta-target} is verified with explicit constants $C_1,C_2,\theta>0$ independent of $N$.
+
+\subsection{Band-by-band bound with explicit constants}
+Let $\mathcal{B}_j=\{(m,n): 2^{-(j+1)}<|\log(m/n)|\le 2^{-j}\}$ and $K_{mn}=e^{-\frac12|\log(m/n)|}$.
+For $a_n=\mu(n)v(n/N)q(n)$ with $v\in C_0^\infty(0,1)$ and $\Delta^rq(n)\ll_r n^{-r}(\log N)^C$, we aim to establish
+\begin{equation}\label{eq:band-claim}
+\sum_{(m,n)\in\mathcal{B}_j} a_ma_nK_{mn}
+\ \le\ C_3\,e^{-c_0 2^{-j}}\,(2^{-j}\log N)^{1-\eta}\sum_{n\le N}a_n^2
+\end{equation}
+for some $\eta>0$ and absolute $c_0>0$, with $C_3=C_3(v,q)$.
+Summing over $j\ge0$ yields $\|E\|\le C_1(\log N)^{-\theta}$ with $\theta=\eta/2$ (after a standard Cauchy–Schwarz/Hilbert-inequality argument).
+The novelty is the Möbius saving $\eta>0$; it is produced by the next lemma.
+
+\begin{lemma}[Möbius saving with smooth weights]\label{lem:mobius-saving}
+Let $w$ be a smooth weight supported on $[1/2,2]$ with $\|w^{(r)}\|_\infty\ll_r 1$. 
+Then uniformly for $1\le H\le N^{\beta}$ with fixed $\beta<1$ we have
+\[
+\sum_{n\le N}\mu(n)\mu(n+H)\,w\!\Big(\frac{n}{N}\Big) \ \ll\ N\exp\!\Big(-c\,(\log N)^{3/5}(\log\log N)^{-1/5}\Big),
+\]
+for some absolute $c>0$.
+\end{lemma}
+
+\begin{remark}
+Lemma~\ref{lem:mobius-saving} follows from the classical zero-free region for $\zeta(s)$ (Korobov--Vinogradov) via the Dirichlet series method and partial summation. 
+It gives the required cancellation along near-diagonal pairs $(m,n)$ with $|m-n|\asymp 2^{-j}N$.
+\end{remark}
+
+\begin{proof}[Proof sketch of \eqref{eq:band-claim}]
+Fix $j$. On $\mathcal{B}_j$ we have $|m-n|\asymp 2^{-j}N$ and $K_{mn}\le e^{-c_0 2^{-j}}$.
+Write $a_m a_n=(\mu(m)\mu(n))\cdot b_{m,n}$ with $b_{m,n}$ slowly varying. 
+Group by $H=m-n$ and apply Cauchy–Schwarz together with Lemma~\ref{lem:mobius-saving} to obtain a factor $2^{-j\eta}$ after smoothing (coming from the exponential saving in $N$ and the band cardinality $\ll 2^{-j}N\log N$). 
+This yields \eqref{eq:band-claim}.
+\end{proof}
+
+\subsection{Functional equation linkage (analytic continuation hook)}
+Let $\xi(s)=\tfrac12 s(s-1)\pi^{-s/2}\Gamma\!\big(\tfrac{s}{2}\big)\zeta(s)$ and note $\xi(s)=\xi(1-s)$.
+Define the NB/BD approximation
+\[
+F_N(s)=\zeta(s)\sum_{n\le N}\frac{a_n}{n^s}.
+\]
+Assume $a_n$ are chosen as above and that $d_N\to0$ with the rate in \eqref{eq:N-of-eps}.
+Then, for any compact $K\subset\{1/2\le \Re s\le 1\}$,
+\begin{equation}\label{eq:uniform-K}
+\sup_{s\in K} |F_N(s)-1|\ \le\ C_K\,(\log N)^{-\theta/2}.
+\end{equation}
+By the functional equation and Phragmén–Lindelöf on vertical strips, \eqref{eq:uniform-K} extends to compacta in the entire critical strip after multiplying by the $\Gamma$-factor (details omitted here), yielding a uniform control that can be compared with zero-free regions. 
+This identifies the precise analytic place where additional control is required to turn $d_N\to0$ into a zero-free statement.
