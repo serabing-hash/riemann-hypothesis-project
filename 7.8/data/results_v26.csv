@@ -1,0 +1,2 @@
+N,MSE,CI_low,CI_high,theta_OLS,theta_Huber,Tw,lambda,seed,runtime_sec,notes
+100000,0.009,0.0085,0.0095,5.94,6.01,115,0.001,42,86310,bootstrap 300
