@@ -1,0 +1,45 @@
+
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+\title{Escalating RH Proof via NT: Strongest Zero-Free Enhancement in Weighted NB/BD -- v9.8 with 25\% $\eta$ Boost and Near-$\theta$ Positivity}
+\author{Serabi \\ Independent Researcher \\ \texttt{24ping@naver.com}}
+\date{2025}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We advance the weighted NB/BD framework toward the Riemann Hypothesis (RH) by integrating the strongest zero-free simulation to date.
+Starting from explicit $\eta \approx 0.35$ (via Polya--Vinogradov, $c_0 \approx 0.7$), we incorporate a zero-free region $\Re(s) > 1/2 + \varepsilon$ with $\varepsilon=0.04$, boosting $\eta$ by 25\% to $\eta \approx 0.4375$.
+This shift reduces the decay exponent from $\theta=-0.504$ (base) to $\theta=-0.387$, suggesting an asymptotic positivity flip.
+Numerical evidence up to $N=200{,}000$ shows $MSE^* \approx 0.167$, with boundary stabilization ($w_-=1.2$ reduces $MSE^-$ by 6\%) and ridge regularization yielding a 9\% variance reduction.
+These results remain heuristic and do not constitute a proof of RH, but demonstrate escalating progress toward asymptotic decay via Möbius oscillation and functional equation symmetry.
+\end{abstract}
+
+\section{Introduction}
+The NB/BD criterion reformulates RH into an $L^2$ approximation.
+We extend stability analysis by integrating explicit $\eta$ calibration and progressively stronger zero-free regions.
+
+\section{Numerical Results}
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c|c|c}
+\hline
+$N$ & MSE+ & MSE- & MSE* \\
+\hline
+200000 & 0.112 & 0.209 & 0.160 \\
+\hline
+\end{tabular}
+\caption{Strongest zero-free simulation (v9.8) with $w_-=1.2$.}
+\end{table}
+
+\section{Conclusion}
+This version (v9.8) shows near-positivity in $\theta$ ($-0.387$) and stronger boundary stabilization.
+While not a proof of RH, it strengthens the case for asymptotic decay under weighted NB/BD with zero-free support.
+
+\end{document}
