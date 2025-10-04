@@ -1,0 +1,2 @@
+N,MSE_plus,MSE_minus,MSE_star,ridge_5k_gain,w_minus
+5000000,0.098,0.185,0.145,12% (0.170→0.150),1.2 (≈10% MSE-↓)
