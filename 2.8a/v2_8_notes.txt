@@ -1,0 +1,6 @@
+v2.8 Verification Edition — Internal Notes
+------------------------------------------
+• Purpose: strengthen analytic backbone between v2.7 and the public v3.0.
+• Core: weighted Hilbert lemma; Möbius cancellation with smooth cutoff; normalized kernel.
+• Fit protocol: log MSE* = a + b log log N, theta = -b (track local drift only).
+• To-do for v3.0: integral analogue of lemma; sharpen bounds; unify notation with final archive style.

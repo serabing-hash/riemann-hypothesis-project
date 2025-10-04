@@ -1,0 +1,21 @@
+
+\section{Appendix A: Data and Fit Protocol}
+We include a compact CSV (\texttt{data/mse_data.csv}) with $(N,\mathrm{MSE}^\ast)$ samples used for internal checks.
+The fit model used is
+\begin{equation*}
+\log \mathrm{MSE}^\ast = a + b \log\log N,\qquad \theta=-b,
+\end{equation*}
+estimated by ordinary least squares (OLS). See \texttt{data/ols_fit.py}.
+
+\section{Appendix B: Notes on the Band Decomposition}
+Let $\mathcal B_j=\{(m,n):2^{-(j+1)}<|\log(m/n)|\le 2^{-j}\}$. On $\mathcal B_j$ we have
+$K_{mn}\le e^{-c\,2^{-j}}$ and $\#\mathcal B_j\ll 2^{-j}N\log N + N$.
+A weighted discrete Hilbert inequality bounds
+$\sum_{(m,n)\in\mathcal B_j}\frac{x_my_n}{|m-n|}\ll(\log N)\|x\|_2\|y\|_2$.
+With $a_n=\mu(n)v(n/N)q(n)$ the main term cancels, and smoothness of $v$ supplies a factor $2^{-j\delta}$.
+Summation in $j$ yields $\sum_{m\ne n}a_ma_nK_{mn}\ll (\log N)^{-\theta}\sum_n a_n^2$.
+
+\section{Appendix C: Next Steps Toward v3.0}
+We will streamline: (i) a continuous integral analogue of Lemma~\ref{lem:hilbert}; (ii) explicit tracking of the
+low-frequency weight $q$ via finite-difference bounds; and (iii) a modular separation between analytic estimates
+and numerical regularization (window, ridge, and basis choices).

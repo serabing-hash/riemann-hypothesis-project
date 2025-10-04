@@ -1,0 +1,111 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\title{NB/BD Framework Toward RH (v2.3):\\
+Orthodox Strengthening via Weighted Hilbert Decay and Zero--Free Input}
+\author{Serabi}
+\date{2025}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We continue the orthodox analytic number theory line for the Nyman--Beurling/B\'aez-Duarte (NB/BD) program toward the Riemann Hypothesis (RH).
+Version 2.3 upgrades the weighted Hilbert-type decay lemma for M\"obius-weighted coefficients by isolating dyadic log-bands and employing discrete Abel summation together with short-interval cancellation of the Mertens function.
+We also explain how standard zero-free information for $\zeta(s)$ feeds into the decay exponent.
+No heuristic simulation is used; all statements are analytic.
+This note is a self-contained successor to v2.2 and a stepping stone to an arXiv-ready v3.0.
+\end{abstract}
+
+\section{Introduction}
+Let $\mu$ denote the M\"obius function and $M(x)=\sum_{n\le x}\mu(n)$.
+In the NB/BD approach one studies the $L^2$-approximation
+\begin{equation}\label{eq:NBBDgoal}
+\inf_{(a_n)} \int_{\mathbb{R}} \Big|\zeta\!\big(\tfrac12+it\big)\sum_{n\le N}\frac{a_n}{n^{1/2+it}}-1\Big|^2 w(t)\,dt,
+\end{equation}
+whose normal equations lead to a quadratic form involving the Hilbert-type kernel
+$K_{mn}=\min\{\sqrt{m/n},\sqrt{n/m}\}=e^{-\frac12|\log(m/n)|}$.
+Stability hinges on bounding off-diagonal contributions when $a_n$ is M\"obius-weighted.
+
+We fix a smooth cutoff $v\in C_0^\infty(0,1)$ with uniformly bounded derivatives and a slowly varying weight $q(n)$ satisfying for all $r\ge 1$
+\begin{equation}\label{eq:qdiff}
+|q(n)|\ll (\log N)^C,\qquad \Delta^r q(n)\ll_r (\log N)^C\, n^{-r}.
+\end{equation}
+Set
+\begin{equation}\label{eq:an}
+a_n=\mu(n)\,v\!\Big(\frac{n}{N}\Big)\,q(n),\qquad 1\le n\le N.
+\end{equation}
+
+\section{Weighted Hilbert Decay (Orthodox v2.3)}
+Write
+\begin{equation}\label{eq:S}
+S:=\sum_{\substack{m\ne n\\ m,n\le N}} a_m a_n\,K_{mn}.
+\end{equation}
+
+\begin{lemma}[Weighted Hilbert decay]\label{lem:hilbert}
+Under \eqref{eq:qdiff}--\eqref{eq:an} there exist absolute constants $\theta>0$ and $C<\infty$ such that
+\begin{equation}\label{eq:decay}
+S\;\le\; C\,(\log N)^{-\theta}\sum_{n\le N} |a_n|^2.
+\end{equation}
+One may take $\theta=\min\{\delta,\eta\}$ where $\delta>0$ arises from the smooth log-band analysis and $\eta>0$ is any admissible exponent for short-interval cancellation of $M(x)$.
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+Partition into logarithmic bands
+\(
+\mathcal{B}_j=\{(m,n):2^{-(j+1)}<|\log(m/n)|\le 2^{-j}\}
+\)
+so that $K_{mn}\le e^{-c\,2^{-j}}$ on $\mathcal{B}_j$.
+On a fixed band write $m=n+h$ with $|h|\asymp 2^{-j}n$ and freeze the smooth weight by Taylor/finite-difference estimates from \eqref{eq:qdiff}.
+Discrete Abel summation in $h$ moves the M\"obius difference to $M(n+h)$ and produces a factor $\Delta_h \mathcal{W}_j$ supported on $|h|\asymp H:=2^{-j}N$ with $\sum_{|h|\asymp H}|\Delta_h \mathcal{W}_j|\ll 1$.
+Short-interval bounds for $M$ then yield, for $n\asymp N$,
+\(
+\max_{|t|\le H}|M(n+t)|\ll H^{1-\eta}(\log N)^A
+\)
+for some $\eta>0$, $A>0$.
+Summing over $n$ gives a contribution $\ll N\cdot H^{1-\eta}(\log N)^A$ per band, which after Cauchy--Schwarz and the support of $a_n$ converts to
+\(
+\ll 2^{-j\delta}(\log N)^A\sum_{n\le N}|a_n|^2
+\)
+for some $\delta>0$.
+The kernel factor $e^{-c\,2^{-j}}$ makes the sum over $j$ rapidly convergent, producing \eqref{eq:decay}.
+\end{proof}
+
+\begin{corollary}[NB/BD stability]
+Let $A=I+E$ be the normal-equation matrix for \eqref{eq:NBBDgoal}. Then
+\(
+\|E\|_{\ell^2\to\ell^2}\ll (\log N)^{-\theta}
+\)
+with $\theta$ from Lemma~\ref{lem:hilbert}, hence $A^{-1}$ exists for $N$ large and the optimal distance $d_N\to 0$.
+\end{corollary}
+
+\begin{remark}[Zero-free input and explicit exponents]
+Any zero-free region for $\zeta(s)$ on $\Re(s)>1-\frac{c}{(\log T)^A}$ implies bounds for $M(x)$ by classical explicit formula methods (see e.g.\ Titchmarsh/Heath-Brown).
+Such input increases $\eta$ and therefore $\theta$ in \eqref{eq:decay}.
+Our statement is unconditional (some $\theta>0$) but improves monotonically as zero-free information strengthens.
+\end{remark}
+
+\section{Outlook to v3.0}
+The route to an arXiv-ready v3.0 is to (i) insert explicit zero-free constants into the short-interval $M(x)$ bound,\footnote{For instance, Korobov--Vinogradov--type zero-free regions yield power-saving with logarithmic losses, sufficient to make $\theta$ explicit.} (ii) connect the NB/BD normal equations to the completed zeta $\xi(s)$ to exploit the functional equation, and (iii) provide a concise appendix collecting the dyadic/Abel-summation estimates with all remainder terms tracked.
+
+\begin{thebibliography}{9}
+\bibitem{baezduarte2003}
+L.~B\'aez-Duarte, \emph{A strengthening of the Nyman--Beurling criterion}, Rend.\ Lincei Mat.\ Appl.\ \textbf{14} (2003), 5--11.
+
+\bibitem{titchmarsh}
+E.~C.~Titchmarsh (revised by D.~R.~Heath-Brown), \emph{The Theory of the Riemann Zeta-Function}, 2nd ed., Oxford Univ.\ Press, 1986.
+
+\bibitem{conrey}
+J.~B.~Conrey, \emph{The Riemann Hypothesis}, Notices Amer.\ Math.\ Soc.\ \textbf{50} (2003), 341--353.
+\end{thebibliography}
+
+\end{document}

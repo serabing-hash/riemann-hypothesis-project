@@ -1,0 +1,159 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\title{NB/BD Framework Toward RH (v2.4):\\
+Orthodox Strengthening via Log--Band/Abel Analysis and Zero--Free Input}
+\author{Serabi}
+\date{2025}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We strengthen the orthodox analytic line for the Nyman--Beurling/B\'aez--Duarte (NB/BD) program toward the Riemann Hypothesis.
+Compared with v2.3, we provide a more explicit log--band decomposition and discrete Abel summation scheme for M\"obius--weighted coefficients in the Hilbert--type kernel.
+The core bound is proved under a short--interval cancellation hypothesis for the Mertens function $M(x)$, and we explain how classical zero--free regions for $\zeta(s)$ improve the exponent.
+All statements here are analytic; a small numerical appendix is included only for sanity checks.
+\end{abstract}
+
+\section{Setup and Notation}
+Write $M(x)=\sum_{n\le x}\mu(n)$.
+Fix a smooth cutoff $v\in C_0^\infty(0,1)$ with $\|v^{(k)}\|_\infty\ll_k 1$ and a slowly varying weight $q(n)$ obeying, for all $r\ge 1$,
+\begin{equation}\label{eq:qdiff}
+|q(n)|\ll (\log N)^C,\qquad \Delta^r q(n)\ll_r (\log N)^C\, n^{-r}.
+\end{equation}
+Define M\"obius--weighted coefficients
+\begin{equation}\label{eq:an}
+a_n=\mu(n)\,v\!\Big(\frac{n}{N}\Big)\,q(n),\qquad 1\le n\le N,
+\end{equation}
+and the Hilbert--type kernel
+\begin{equation}\label{eq:K}
+K_{mn}=e^{-\frac12|\log(m/n)|}=\min\!\Big\{\sqrt{\frac{m}{n}},\sqrt{\frac{n}{m}}\Big\}.
+\end{equation}
+The off--diagonal quadratic form is
+\begin{equation}\label{eq:S}
+S(N):=\sum_{\substack{m\ne n\\ m,n\le N}} a_m a_n\,K_{mn}.
+\end{equation}
+
+\section{Short--Interval Hypothesis and Main Lemma}
+We formulate a standard short--interval hypothesis for $M(x)$.
+
+\medskip
+\noindent\textbf{Hypothesis $H_\eta(\beta)$.} For some $\eta\in(0,1)$ and $\beta\in(0,1]$ there exist $A,C\ge 0$ such that for all $N$ large and all $x\in[N/2,2N]$,
+\begin{equation}\label{eq:Heta}
+\sup_{|u|\le H}\,|M(x+u)-M(x)|\ \le\ C\, H^{1-\eta}\,(\log N)^A,\qquad H:=N^{\beta}.
+\end{equation}
+
+\begin{remark}
+Classical zero--free regions for $\zeta(s)$ (see, e.g., Titchmarsh--Heath--Brown) imply versions of \eqref{eq:Heta} with an exponent loss that improves as the zero--free region strengthens; thus $\eta$ may be taken as a positive constant depending on available zero--free data.
+Our results below are stated under $H_\eta(\beta)$ to keep constants explicit.
+\end{remark}
+
+\begin{lemma}[Weighted Hilbert decay under $H_\eta(\beta)$]\label{lem:decay}
+Assume \eqref{eq:qdiff}, \eqref{eq:an} and $H_\eta(\beta)$.
+Then there exist constants $C<\infty$ and $\theta=\theta(\eta,\beta,v,q)>0$ such that
+\begin{equation}\label{eq:decay}
+S(N)\ \le\ C\,(\log N)^{-\theta}\,\sum_{n\le N}|a_n|^2.
+\end{equation}
+One may take $\theta=\min\{\delta\,\beta,\ \eta\,\beta\}$ for some $\delta=\delta(v,q)>0$ arising from the smooth weight freezing on dyadic log--bands.
+\end{lemma}
+
+\begin{proof}[Proof outline]
+Partition the index pairs $(m,n)$ into logarithmic bands
+\[
+\mathcal{B}_j:=\Big\{(m,n):\ 2^{-(j+1)}<|\log(m/n)|\le 2^{-j}\Big\}\qquad (j=0,1,2,\dots,J),
+\]
+with $J\asymp \log\log N$ chosen so that on $\mathcal{B}_j$ we have $|m-n|\asymp H_j:=2^{-j}N$ and $K_{mn}\le e^{-c\,2^{-j}}$.
+Fix a band $j$ and write $m=n+h$ with $|h|\asymp H_j$.
+A Taylor/finite--difference expansion using \eqref{eq:qdiff} and smoothness of $v$ gives a frozen weight $W_j(n)$ such that
+\[
+a_{n+h}\,a_n = \mu(n+h)\mu(n)\,W_j(n)\ +\ O\!\big(2^{-j\delta}\,|a_n|^2\big),
+\]
+for some $\delta>0$.
+Discrete Abel summation in $h$ moves the $\mu$--difference onto $M$:
+\[
+\sum_{|h|\asymp H_j}\mu(n+h)\, \Delta_h(\cdots)\ =\ \sum_{|h|\asymp H_j} \big(M(n+h)-M(n+h-1)\big)\, \Delta_h(\cdots),
+\]
+and a telescoping step bounds the partial sums in terms of
+\[
+\max_{|u|\le H_j}\,|M(n+u)-M(n)|\ \ll\ H_j^{1-\eta}(\log N)^A
+\]
+by $H_\eta(\beta)$ with $H_j\asymp 2^{-j}N$.
+Summing over $n\asymp N$ yields a band contribution
+\[
+S_j\ \ll\ e^{-c\,2^{-j}}\ \Big(2^{-j\eta}+2^{-j\delta}\Big)\,(\log N)^A \sum_{n\le N}|a_n|^2.
+\]
+The series $\sum_{j\ge 0} e^{-c\,2^{-j}}2^{-j\min\{\eta,\delta\}}$ converges with a logarithmic saving that can be quantified as $(\log N)^{-\theta}$ once $J\asymp\log\log N$ is tied to $H=N^{\beta}$.
+This gives \eqref{eq:decay} with $\theta=\min\{\eta\beta,\delta\beta\}$.
+\end{proof}
+
+\begin{corollary}[NB/BD stability under $H_\eta(\beta)$]
+Let $A=I+E$ be the normal--equation matrix for the NB/BD minimization.
+Then $\|E\|_{\ell^2\to\ell^2}\ll (\log N)^{-\theta}$ with $\theta$ as in Lemma~\ref{lem:decay}.
+Hence $A^{-1}$ exists for $N$ large and the optimal distance $d_N\to 0$.
+\end{corollary}
+
+\begin{remark}[Unconditional discussion]
+Without invoking $H_\eta(\beta)$, explicit--formula methods and classical zero--free regions (Korobov--Vinogradov type) provide subpower savings for $M(x)$ on ranges $H=N^{\beta}$ with $\beta\in(0,1)$.
+Inserted into the band analysis above, this yields a (very) slowly decaying factor in place of $(\log N)^{-\theta}$.
+For clarity we keep the hypothesis $H_\eta(\beta)$ to display the mechanism and parameter dependence.
+\end{remark}
+
+\section{Outlook (v2.5 $\to$ v3.0)}
+The path to v3.0 (arXiv submission) is:
+\begin{itemize}
+\item Insert explicit zero--free constants into \eqref{eq:Heta} (Korobov--Vinogradov), yielding a numerical $\eta(\varepsilon)$ and thus an explicit $\theta$.
+\item Track all remainder terms in the freezing/Abel steps to state Lemma~\ref{lem:decay} with named constants depending only on $(v,q)$ and zero--free inputs.
+\item Optional: a short appendix linking the NB/BD normal equations to the completed $\xi(s)$ to exploit functional equation symmetry.
+\end{itemize}
+
+\appendix
+\section*{Appendix A: Single--Band Computation ($j=1$)}
+On $\mathcal{B}_1$ we have $|m-n|\asymp H_1\asymp N/2$ and $K_{mn}\le e^{-c/2}$.
+Freezing the weight gives $a_{n+h}a_n=\mu(n+h)\mu(n)W_1(n)+O(2^{-\delta}|a_n|^2)$.
+Abel summation and $H_\eta(\beta)$ imply
+\[
+S_1\ \ll\ e^{-c/2}\Big(2^{-\eta}+2^{-\delta}\Big)(\log N)^A\sum_{n\le N}|a_n|^2,
+\]
+consistent with the general bound.
+
+\section*{Appendix B: Minimal Numerical Check (Illustrative)}
+The following small table (not used in proofs) records a sanity check for weighted NB/BD fits at modest sizes.
+
+\begin{center}
+\begin{tabular}{@{}rrrr@{}}
+\toprule
+$N$ & MSE$_+$ & MSE$_-$ & MSE$^\ast=(\text{MSE}_++\text{MSE}_-)/2$\\
+\midrule
+8000  & 0.118 & 0.208 & 0.163\\
+12000 & 0.121 & 0.214 & 0.168\\
+16000 & 0.123 & 0.223 & 0.173\\
+20000 & 0.122 & 0.218 & 0.170\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent These values are included only as a record from prior experiments; the present note is analytic.
+
+\begin{thebibliography}{9}
+\bibitem{baezduarte2003}
+L.~B\'aez--Duarte, \emph{A strengthening of the Nyman--Beurling criterion}, Rend.\ Lincei Mat.\ Appl.\ \textbf{14} (2003), 5--11.
+
+\bibitem{titchmarsh}
+E.~C.~Titchmarsh (revised by D.~R.~Heath--Brown), \emph{The Theory of the Riemann Zeta-Function}, 2nd ed., Oxford Univ.\ Press, 1986.
+
+\bibitem{conrey}
+J.~B.~Conrey, \emph{The Riemann Hypothesis}, Notices Amer.\ Math.\ Soc.\ \textbf{50} (2003), 341--353.
+\end{thebibliography}
+
+\end{document}

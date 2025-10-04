@@ -1,0 +1,49 @@
+\section{Appendix: Minimal Code and Notes}\label{app:code}
+
+\subsection*{Toy code (Python)}
+The following script constructs $K_{mn}=e^{-\tfrac12|\log(m/n)|}$, applies a smooth bump $v(\cdot)$,
+and shows the scaling of the off-diagonal mass relative to $\sum a_n^2$.
+
+\begin{verbatim}
+# file: code/hilbert_toy.py
+import numpy as np
+
+def smooth_bump(x):
+    y = np.zeros_like(x)
+    mask = (x>0) & (x<1)
+    t = x[mask]
+    y[mask] = np.exp(-1.0/(t*(1.0-t)))
+    y /= (y.max() if y.max()>0 else 1.0)
+    return y
+
+def assemble_a(N):
+    # mu(n) replaced by a simple +/- toy to avoid number-theory library;
+    # users may plug in true Möbius here.
+    mu_toy = np.ones(N, dtype=float)
+    mu_toy[1::2] = -1.0
+    v = smooth_bump(np.arange(1, N+1)/N)
+    q = np.ones(N, dtype=float)
+    return mu_toy * v * q
+
+def off_diag_ratio(N):
+    a = assemble_a(N)
+    n = np.arange(1, N+1, dtype=float)
+    M, Nn = np.meshgrid(n, n, indexing='ij')
+    K = np.exp(-0.5*np.abs(np.log(M/Nn)))
+    A = np.outer(a, a)
+    off = (A*K).sum() - np.sum(np.diag(A))
+    diag = np.sum(a*a)
+    return off/diag
+
+for N in [2000, 4000, 8000, 16000]:
+    r = off_diag_ratio(N)
+    print(N, r)
+\end{verbatim}
+
+\subsection*{Notes}
+\begin{itemize}
+\item The toy code is purely illustrative; it replaces $\mu(n)$ by a sign pattern.
+Users may substitute the true M\"obius function.
+\item Analytically, Lemma~\ref{lem:hilbert-ed} rests on band decomposition,
+a discrete Hilbert inequality, M\"obius cancellation, and the smoothness of $v$ and $q$.
+\end{itemize}

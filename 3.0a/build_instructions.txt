@@ -1,0 +1,11 @@
+Build instructions (TeX Live/MiKTeX):
+
+1) pdflatex main.tex
+2) bibtex main
+3) pdflatex main.tex
+4) pdflatex main.tex
+
+Notes:
+- No figures are required.
+- If you submit to arXiv, include both `main.tex` and `references.bib` in the upload.
+- Ensure `\bibliographystyle{plain}` and `\bibliography{references}` remain unchanged.
