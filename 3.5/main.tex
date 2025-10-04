@@ -1,0 +1,112 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{cite}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+% --- theorem environments ---
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\title{NB/BD Stability via a Weighted Hilbert Operator: \\ 
+Operator--Spectral Roadmap (v3.5)}
+\author{Serabi \\ Independent Researcher \\ \texttt{24ping@naver.com}}
+\date{2025}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We refine a weighted Hilbert-operator approach to the Nyman--Beurling/B\'aez-Duarte (NB/BD) criterion.
+Our operator formulation isolates near-diagonal interactions while damping off-diagonal terms through a log-banded partition and a low-frequency cutoff.
+We provide a self-contained lemma (Hilbert-type decay with M\"obius-weighted coefficients) with explicit assumptions, clarify where numerical heuristics enter, and outline a spectral roadmap (near-normality, compact perturbations, and stability of normal equations).
+This note is a \emph{mathematical framework}, not a proof of the Riemann Hypothesis (RH).
+\end{abstract}
+
+\section{Setup and Operator Form}
+Let $N$ be large. Fix a smooth cutoff $v\in C_0^\infty(0,1)$ with $\|v^{(k)}\|_\infty\ll_k 1$ and a slowly-varying weight $q$ with
+\[
+|q(n)|\ll(\log N)^C,\qquad \Delta^r q(n)\ll_r (\log N)^C n^{-r}.
+\]
+Define coefficients $a_n=\mu(n)\,v(n/N)\,q(n)$ and the kernel
+\[
+K_{mn}=e^{-\frac12|\log(m/n)|}=\min\!\left\{\sqrt{\tfrac{m}{n}},\sqrt{\tfrac{n}{m}}\right\}.
+\]
+For vectors $x=(x_n)_{n\le N}$ set the discrete operator
+\[
+(\mathcal{H}x)_m=\sum_{n\le N} K_{mn}\,x_n, \qquad m\le N.
+\]
+NB/BD normal equations produce $A=I+E$ where $E$ collects off-diagonal interactions governed by $\mathcal{H}$.
+
+\section{Hilbert-Type Decay Lemma}
+\begin{lemma}[Weighted Hilbert Decay]
+\label{lem:hilbert}
+With $a_n=\mu(n)v(n/N)q(n)$ as above, there exist constants $\theta>0$ and $C=C(v,q)$ such that
+\[
+\sum_{\substack{m\ne n\\ m,n\le N}} a_m a_n\,K_{mn}
+\;\le\; C\,(\log N)^{-\theta}\sum_{n\le N} a_n^2.
+\]
+\end{lemma}
+
+\begin{proof}[Sketch]
+Partition pairs $(m,n)$ into dyadic log-bands
+\(
+\mathcal{B}_j:=\{(m,n):2^{-(j+1)}<|\log(m/n)|\le 2^{-j}\}.
+\)
+On $\mathcal{B}_j$ we have $K_{mn}\le e^{-c\,2^{-j}}$.
+A discrete Hilbert-type bound with smooth cutoffs controls the raw band sum by $(\log N)\|a\|_2^2$.
+With $a_n=\mu(n)\cdot$(low-frequency), summation by parts across each band gains an extra $2^{-j\delta}$ via smoothness of $v$ and the oscillation of $\mu(n)$, yielding
+\[
+\sum_{(m,n)\in\mathcal{B}_j} a_m a_n K_{mn}
+\;\ll\; e^{-c\,2^{-j}} (2^{-j}\log N)^{1-\varepsilon}\sum a_n^2.
+\]
+Summing $j$ gives the stated $(\log N)^{-\theta}$ suppression for some $\theta>0$.
+\end{proof}
+
+\begin{remark}[Scope]
+Lemma~\ref{lem:hilbert} is qualitative: it ensures \emph{some} $\theta>0$ under the stated smooth and low-frequency assumptions.
+Sharper, explicit $\theta$ requires zero-free input or stronger mean value bounds for M\"obius correlations; this is outside the present note.
+\end{remark}
+
+\section{Spectral Roadmap}
+Write $A=I+E$ for the NB/BD normal matrix.
+Lemma~\ref{lem:hilbert} gives $\|E\|_{\ell^2\to \ell^2}\le C(\log N)^{-\theta}<1$ for $N$ large, so $A$ is invertible via a Neumann series.
+This supports stability of the least-squares coefficients and the NB/BD distance $d_N$ in the weighted, low-frequency regime.
+A rigorous spectral path forward is:
+\begin{itemize}
+\item[(i)] \textbf{Near-normality:} show $[\mathcal{H},\mathcal{H}^\ast]$ is compact/small on the weighted subspace;
+\item[(ii)] \textbf{Band-limited compactness:} the off-diagonal tail is compact under log-banding and smoothing;
+\item[(iii)] \textbf{Fredholm alternative:} stability of $A=I+E$ under compact perturbations yields control of minimizers.
+\end{itemize}
+
+\section{Limitations and Outlook}
+Our analysis does not prove RH. It isolates why the NB/BD linear system is \emph{stable} under weighted, low-frequency designs.
+Future steps (all purely NT):
+\begin{itemize}
+\item explicit band-by-band constants and an effective $\theta(\delta)$;
+\item zero-free region input to trade oscillation for quantitative decay;
+\item functional equation/explicit formula integration to close remaining gaps.
+\end{itemize}
+
+\begin{thebibliography}{9}
+\bibitem{BaezDuarte2003}
+L.~B\'aez-Duarte,
+\emph{A strengthening of the Nyman--Beurling criterion for the Riemann Hypothesis},
+Rend. Lincei Mat. Appl. \textbf{14} (2003), 5--11.
+
+\bibitem{Titchmarsh}
+E.~C. Titchmarsh (rev. D.~R. Heath-Brown),
+\emph{The Theory of the Riemann Zeta-Function}, 2nd ed., OUP, 1986.
+
+\bibitem{Conrey}
+J.~B. Conrey,
+\emph{The Riemann Hypothesis},
+Notices AMS \textbf{50} (2003), 341--353.
+\end{thebibliography}
+
+\end{document}
