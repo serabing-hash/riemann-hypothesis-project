@@ -1,0 +1,139 @@
+% ===== main.tex : Overleaf에 그대로 붙여넣어 컴파일 =====
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{cite}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+% --- Theorem environments ---
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\title{Operator--Spectral Roadmap toward RH: \\
+A Weighted Hilbert Embedding of the NB/BD Framework (v3.4)}
+\author{Serabi \\ \small Independent Researcher \\ \small\texttt{24ping@naver.com}}
+\date{2025}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We propose an operator--spectral framework that integrates the Nyman--Beurling/B\'aez--Duarte (NB/BD) $L^2$ approximation with a weighted Hilbert embedding and the functional equation of the completed zeta. The central object is a quasi self-adjoint operator $T_\xi$ acting on a weighted $L^2$ space such that finite sections of the NB/BD kernel approximate $T_\xi$ compactly. This clarifies how M\"obius oscillation dampens off-diagonal interactions (a ``weighted Hilbert lemma'') and how the functional symmetry $\xi(s)=\xi(1-s)$ manifests as an operator conjugation. We outline a concrete, staged roadmap from this surrogate model to a self-adjoint realization whose real spectrum would imply the Riemann Hypothesis. This is a design note (v3.4): proofs are sketched, with complete proofs deferred to the v3.5--v3.9 series.
+\end{abstract}
+
+\section{Introduction}
+The Riemann Hypothesis (RH) is equivalent to the statement that the nontrivial zeros of $\zeta(s)$ lie on $\Re s=\tfrac12$. In the Nyman--Beurling/B\'aez--Duarte (NB/BD) program, RH is rephrased as the decay of an $L^2$-distance $d_N\to 0$. 
+Previous versions established a \emph{weighted Hilbert lemma} for M\"obius-weighted coefficients, suppressing off-diagonal terms by $(\log N)^{-\theta}$ with $\theta>0$ in a model setting.
+Here we assemble these pieces into an \emph{operator--spectral} structure whose symmetry reflects the functional equation of the completed zeta $\xi(s)=\pi^{-s/2}\Gamma(s/2)\zeta(s)$.
+
+\paragraph{Guiding principle.}
+If an operator $T_\xi$ encoding $\xi$ admits a self-adjoint realization on a suitable Hilbert space, then its spectrum is real; under the canonical spectral map this would pin zeros to the critical line. Our framework builds a quasi self-adjoint surrogate and shows how finite NB/BD sections approximate it.
+
+\section{Weighted Hilbert Embedding and Kernel}
+Work on the space $H=L^2((0,\infty),w(x)\,dx)$ with
+\[
+w(x)=x^{-1/2}e^{-x}.
+\]
+For $m,n\in\mathbb{N}$ let 
+\[
+K(m,n)=\exp\!\Big(-\tfrac12\left|\log\frac{m}{n}\right|\Big)=\min\!\left\{\sqrt{\frac{m}{n}},\sqrt{\frac{n}{m}}\right\}.
+\]
+Let $K_N$ be the $N\times N$ matrix $(K(m,n))_{m,n\le N}$ and consider M\"obius-weighted coefficients
+\[
+a_n=\mu(n)\,v(n/N)\,q(n),
+\]
+with $v\in C_0^\infty(0,1)$ and $q$ slowly varying (finite differences $\Delta^rq(n)\ll_r (\log N)^C n^{-r}$).
+
+\begin{lemma}[Weighted Hilbert decay, model form]
+\label{lem:hilbert}
+There exist $\theta>0$ and $C=C(v,q)$ such that
+\[
+\sum_{\substack{m\ne n\\ m,n\le N}} a_m a_n\,K(m,n)
+\;\le\; C(\log N)^{-\theta}\sum_{n\le N} a_n^2.
+\]
+\end{lemma}
+
+\begin{proof}[Sketch]
+Partition into dyadic bands in $|\log(m/n)|$. On each band $K(m,n)\le e^{-c2^{-j}}$. The M\"obius factor cancels the main contribution within a band; smoothness of $v$ yields an extra $2^{-j\delta}$. Summing $j$ gives the $(\log N)^{-\theta}$ savings.
+\end{proof}
+
+\begin{remark}
+Lemma~\ref{lem:hilbert} is a surrogate (model) statement: it isolates the mechanism (M\"obius cancellation $+$ smoothing) responsible for off-diagonal damping in NB/BD normal equations. In later versions we will prove a precise variant adapted to the operator below.
+\end{remark}
+
+\section{An Operator Surrogate for the Completed Zeta}
+Let $\mathcal{F}$ be the Mellin transform $(\mathcal{F}f)(s)=\int_0^\infty f(x)\,x^{s-1}\,dx$. 
+Define the operator
+\[
+T_\xi \;:=\; \mathcal{M}^{-1}\circ \Xi(s)\circ \mathcal{M}, 
+\qquad \Xi(s):=\pi^{-s/2}\Gamma(s/2)\zeta(s).
+\]
+On a dense subspace $\mathcal{S}\subset H$ (Schwartz functions against $w$), $T_\xi$ maps $\mathcal{S}\to\mathcal{S}'$ and extends to a closed operator on $H$.
+
+\begin{proposition}[Functional symmetry as conjugation]
+\label{prop:symmetry}
+Let $J$ be complex conjugation on $H$. Then, formally,
+\[
+JT_\xi J \;=\; T_\xi^\*,
+\]
+reflecting $\Xi(s)=\Xi(1-s)$ on the Mellin line. In particular, if $T_\xi$ admits a self-adjoint realization on $H$, then $\mathrm{Spec}(T_\xi)\subset\mathbb{R}$, which is compatible with RH.
+\end{proposition}
+
+\begin{proof}[Proof idea]
+On the Mellin side $J$ corresponds to $\overline{(\cdot)}$ and inversion $s\mapsto 1-\overline{s}$. The functional equation gives $ \Xi(s)=\overline{\Xi(1-\overline{s})}$ on the critical strip, which yields the stated conjugation identity at the operator level.
+\end{proof}
+
+\section{Finite Sections as Compact Approximants}
+Let $P_N:H\to \mathbb{C}^N$ be the sampling map $(P_N f)_n = \langle f, \phi_n\rangle_w$ with $\phi_n(x)= n^{1/2}\, \mathbf{1}_{[n,n+1)}(x)$ transported to the $x\leftrightarrow\log n$ scale.
+Define the finite section operator $T_N:=P_N T_\xi P_N^\*$.
+
+\begin{proposition}[Compact approximation]
+\label{prop:compact}
+Under the weighted embedding above, $T_N$ is unitarily equivalent, up to uniformly Hilbert--Schmidt error, to the NB/BD kernel matrix $K_N$ perturbed by a banded term arising from the weight $w$ and the cutoff $v$. Consequently, $T_N\to T_\xi$ in the strong resolvent sense along a subsequence if the off-diagonal part obeys Lemma~\ref{lem:hilbert}.
+\end{proposition}
+
+\begin{proof}[Sketch]
+Identify $P_N^\*P_N$ with a localized frame. The kernel $K(m,n)$ appears as the discrete Hilbert kernel for $\log$-spacing. Weighted localization produces a compact (Hilbert--Schmidt) remainder. Decay of off-diagonal mass follows from Lemma~\ref{lem:hilbert}.
+\end{proof}
+
+\section{Roadmap to a Self-Adjoint Realization}
+We outline concrete, checkable targets.
+
+\paragraph{(R1) Domain \& closure.} Construct a core $\mathcal{D}\subset H$ on which $T_\xi$ is symmetric; show essential self-adjointness via a Hardy-type inequality (Carleman criterion on the Mellin axis).
+
+\paragraph{(R2) Spectral calibration.} Compare eigenvalues of $T_N$ with spectral measures of $T_\xi$; prove tightness using Hilbert--Schmidt remainders, then identify limit points by Weyl's criterion.
+
+\paragraph{(R3) NB/BD link.} Show that the normal equations matrix $A_N=I+E_N$ satisfies $\|E_N\|_{\ell^2\to\ell^2}\ll (\log N)^{-\theta}$, implying $d_N\to 0$ for the surrogate system, matching operator resolvent convergence.
+
+\paragraph{(R4) Functional symmetry.} Promote Proposition~\ref{prop:symmetry} to a unitary conjugation $U T_\xi U^{-1}=T_\xi^\*$ with $U^2=I$ by choosing a $\mathcal{F}$-compatible weight.
+
+\paragraph{(R5) Self-adjoint model.} Replace $\Xi(s)$ by a smoothed symbol $\Xi_\varepsilon(s)$ in a Beurling--Selberg window to obtain an explicitly self-adjoint $T_{\xi,\varepsilon}$; pass to $\varepsilon\downarrow 0$.
+
+\section*{Outlook (v3.5--v4.0)}
+\begin{itemize}
+\item \textbf{v3.5}: Explicit domain and closability of $T_\xi$; compactness of remainders.
+\item \textbf{v3.6}: Eigenvalue comparison between $K_N$ and $T_\xi$ (finite-section method).
+\item \textbf{v3.7}: Zero-free input $\Rightarrow$ quantitative band decay (refined $\theta$).
+\item \textbf{v3.8}: Unitary symmetry implementing $\xi(s)=\xi(1-s)$ on $H$.
+\item \textbf{v3.9--4.0}: Integrated manuscript: \emph{An Operator-Theoretic Path to RH}.
+\end{itemize}
+
+\paragraph{Disclaimer.}
+This note is a roadmap. No claim of a proof of RH is made; all ``$\Rightarrow$ RH'' statements are conditional on establishing self-adjointness of the limiting operator.
+
+\begin{thebibliography}{9}
+\bibitem{baezduarte2003}
+L.~B\'aez-Duarte, \emph{A strengthening of the Nyman--Beurling criterion for the Riemann Hypothesis}, Rend. Lincei \textbf{14} (2003), 5--11.
+\bibitem{titchmarsh1986}
+E.~C. Titchmarsh, \emph{The Theory of the Riemann Zeta-Function}, 2nd ed., OUP, 1986.
+\bibitem{conrey2003}
+J.~B. Conrey, \emph{The Riemann Hypothesis}, Notices AMS \textbf{50} (2003), 341--353.
+\end{thebibliography}
+
+\end{document}
